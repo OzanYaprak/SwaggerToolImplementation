@@ -1,0 +1,53 @@
+﻿
+**.NET 9 ile birlikte, varsayılan web API şablonlarında Swagger kullanımı kaldırılmıştır.
+Aşağıda kaldırılan Swagger arayüzünün uygulamaya nasıl yerleştirileceğinin anlatımı yapılmıştır.
+
+-- KURULUM -- 
+
+1- MANAGE NUGET PACKAGES SEKMESİNE GİDİLİR, BROWSE KISMINA GELİNİR VE SWASHBUCKLE YAZIP "Swashbuckle.AspNetCore" OLAN VERSİYON PROJEYE DAHİL EDİLİR.
+2- PROGRAM CLASS A GİDİLİR builder.Services.AddOpenApi(); VE app.MapOpenApi(); ALANLARI YORUM HALİNE GETİRİLİR VEYA KOD SATIRLARI KALDIRILIR.
+3- var app = builder.Build(); KOD SATIRININ ÜZERİNE GELECEK ŞEKİLDE ;
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
+
+    KODLARI YAZILIR.
+
+4- YİNE PROGRAM CLASS'NIN İÇERİSİNDE BULUNAN app.Environment.IsDevelopment() KISMINA AŞAĞIDAKİ GİBİ KODLAR YAZILIR ;
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+5- DAHA SONRA UYGULAMAYI ÇALIŞTIRDIĞIMIZDA BROWSER'IN AÇILMASINI VE SWAGGER UI GÖZÜKMESİNİ SAĞLAMAK İÇİN Properties KLASÖRÜNÜN ALTINDA launchSettings.json DOSYASININ İÇERİSİNDE BULUNAN HTTP VE HTTPS
+   PROFİLLERİNİ AŞAĞIDAKİ GİBİ YENİDEN DÜZENLEYELİM ;
+
+
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true, -- FALSE OLAN DURUMU TRUE YAPIYORUZ
+      "launchUrl": "swagger", --İLAVE
+      "applicationUrl": "http://localhost:5067",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true, -- FALSE OLAN DURUMU TRUE YAPIYORUZ
+      "launchUrl": "swagger", --İLAVE
+      "applicationUrl": "https://localhost:7242;http://localhost:5067",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
