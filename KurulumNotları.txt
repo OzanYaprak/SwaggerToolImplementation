@@ -5,7 +5,7 @@ Aşağıda kaldırılan Swagger arayüzünün uygulamaya nasıl yerleştirilece�
 -- KURULUM -- 
 
 1- MANAGE NUGET PACKAGES SEKMESİNE GİDİLİR, BROWSE KISMINA GELİNİR VE SWASHBUCKLE YAZIP "Swashbuckle.AspNetCore" OLAN VERSİYON PROJEYE DAHİL EDİLİR.
-2- PROGRAM CLASS A GİDİLİR builder.Services.AddOpenApi(); VE app.MapOpenApi(); ALANLARI YORUM HALİNE GETİRİLİR VEYA KOD SATIRLARI KALDIRILIR.
+2- PROGRAM CLASS A GİDİLİR.
 3- var app = builder.Build(); KOD SATIRININ ÜZERİNE GELECEK ŞEKİLDE ;
 
             builder.Services.AddEndpointsApiExplorer();
